@@ -1,5 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/mjaufevfkq/repositories/ELAN-et-FILS
+    - export DEPLOYPATH=/home/mjaufevfkq/public_html
     - /bin/cp -R * $DEPLOYPATH
