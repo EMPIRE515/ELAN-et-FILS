@@ -1,0 +1,2329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Élan & Fils SARL — Multisectoral Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;900&family=Lora:ital,wght@0,400;0,600;1,400&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ===== CSS VARIABLES ===== */
+:root {
+  --navy: #1B2A4A;
+  --navy-light: #243760;
+  --navy-dark: #111b30;
+  --orange: #E8621A;
+  --orange-light: #f07a38;
+  --orange-dark: #c44e10;
+  --brown: #6B3A2A;
+  --white: #ffffff;
+  --off-white: #F8F6F2;
+  --gray-light: #e8e4dc;
+  --gray-mid: #9a9490;
+  --text-dark: #1a1814;
+  --text-mid: #4a4540;
+  --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --radius: 4px;
+  --shadow: 0 8px 40px rgba(27,42,74,0.12);
+  --shadow-lg: 0 20px 60px rgba(27,42,74,0.2);
+}
+
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  color: var(--text-dark);
+  background: var(--white);
+  overflow-x: hidden;
+  font-size: 16px;
+  line-height: 1.65;
+}
+img { max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* ===== PAGE SYSTEM ===== */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ===== NAVIGATION ===== */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(27, 42, 74, 0.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 2px solid var(--orange);
+  transition: var(--transition);
+}
+.nav-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  line-height: 1;
+}
+.logo-main {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 28px;
+  letter-spacing: 0.04em;
+  color: var(--white);
+}
+.logo-main span { color: var(--orange); }
+.logo-sub {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.25em;
+  color: var(--orange);
+  text-transform: uppercase;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.75);
+  padding: 8px 14px;
+  border-radius: var(--radius);
+  transition: var(--transition);
+  cursor: pointer;
+  position: relative;
+}
+.nav-links a:hover, .nav-links a.active {
+  color: var(--orange);
+  background: rgba(232,98,26,0.12);
+}
+.nav-links .dropdown { position: relative; }
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  background: var(--navy-dark);
+  border: 1px solid rgba(232,98,26,0.3);
+  border-radius: var(--radius);
+  min-width: 220px;
+  padding: 8px 0;
+  box-shadow: var(--shadow-lg);
+}
+.dropdown:hover .dropdown-menu { display: block; }
+.dropdown-menu a {
+  display: block;
+  padding: 10px 20px;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.8);
+  border-radius: 0;
+}
+.dropdown-menu a:hover { background: rgba(232,98,26,0.15); color: var(--orange); }
+.nav-cta {
+  background: var(--orange) !important;
+  color: var(--white) !important;
+  padding: 9px 20px !important;
+  border-radius: var(--radius) !important;
+}
+.nav-cta:hover { background: var(--orange-dark) !important; }
+.hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+.hamburger span { width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: var(--transition); }
+
+/* ===== HERO GENERIC ===== */
+.hero {
+  min-height: 100vh;
+  background: var(--navy-dark);
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-top: 72px;
+}
+.hero-bg-pattern {
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255,255,255,0.012) 40px, rgba(255,255,255,0.012) 41px),
+    repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(255,255,255,0.012) 40px, rgba(255,255,255,0.012) 41px);
+}
+.hero-accent {
+  position: absolute;
+  right: -10%;
+  top: 10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(232,98,26,0.2) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero-accent-2 {
+  position: absolute;
+  left: -5%;
+  bottom: -10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(107,58,42,0.15) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.hero-stripe {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--orange), var(--brown), var(--orange));
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 80px 32px;
+  width: 100%;
+}
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 24px;
+}
+.hero-tag::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: var(--orange);
+}
+.hero h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(48px, 7vw, 96px);
+  line-height: 0.92;
+  color: var(--white);
+  letter-spacing: -0.01em;
+  margin-bottom: 28px;
+}
+.hero h1 em {
+  font-style: normal;
+  color: var(--orange);
+  display: block;
+}
+.hero-sub {
+  font-family: 'Lora', serif;
+  font-size: 18px;
+  color: rgba(255,255,255,0.65);
+  max-width: 520px;
+  line-height: 1.75;
+  margin-bottom: 44px;
+}
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--orange);
+  color: var(--white);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 16px 32px;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.btn-primary:hover { background: var(--orange-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,98,26,0.4); }
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: var(--white);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 15px 32px;
+  border-radius: var(--radius);
+  border: 2px solid rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.btn-outline:hover { border-color: var(--orange); color: var(--orange); transform: translateY(-2px); }
+.hero-stats {
+  position: absolute;
+  bottom: 60px;
+  right: 32px;
+  display: flex;
+  gap: 48px;
+}
+.stat-item { text-align: right; }
+.stat-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 42px;
+  color: var(--orange);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-top: 4px;
+}
+
+/* ===== SECTION STYLES ===== */
+.section { padding: 100px 32px; max-width: 1280px; margin: 0 auto; }
+.section-full { padding: 100px 0; }
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 16px;
+}
+.section-tag::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--orange);
+}
+.section-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(36px, 4vw, 56px);
+  color: var(--navy);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  margin-bottom: 20px;
+}
+.section-title span { color: var(--orange); }
+.section-desc {
+  font-family: 'Lora', serif;
+  font-size: 17px;
+  color: var(--text-mid);
+  max-width: 580px;
+  line-height: 1.8;
+  margin-bottom: 60px;
+}
+
+/* ===== CARDS ===== */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+.card {
+  background: var(--off-white);
+  border-radius: 8px;
+  padding: 40px 32px;
+  border: 1px solid var(--gray-light);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--orange);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: var(--transition);
+}
+.card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: transparent; }
+.card:hover::before { transform: scaleX(1); }
+.card-icon {
+  width: 56px;
+  height: 56px;
+  background: rgba(232,98,26,0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  font-size: 24px;
+}
+.card h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--navy);
+  margin-bottom: 12px;
+  letter-spacing: 0.02em;
+}
+.card p { font-size: 15px; color: var(--text-mid); line-height: 1.7; }
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 20px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--orange);
+  cursor: pointer;
+  transition: var(--transition);
+}
+.card-link:hover { gap: 12px; }
+
+/* ===== ABOUT SPLIT SECTION ===== */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.split-visual {
+  background: var(--navy);
+  border-radius: 8px;
+  padding: 60px 48px;
+  position: relative;
+  overflow: hidden;
+}
+.split-visual::after {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(232,98,26,0.3) 0%, transparent 70%);
+  border-radius: 50%;
+}
+.values-list { display: flex; flex-direction: column; gap: 20px; }
+.value-item { display: flex; align-items: flex-start; gap: 16px; }
+.value-dot {
+  width: 10px; height: 10px;
+  background: var(--orange);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+.value-item strong {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--white);
+  display: block;
+  letter-spacing: 0.05em;
+}
+.value-item p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+
+/* ===== DARK BAND ===== */
+.dark-band {
+  background: var(--navy-dark);
+  padding: 80px 32px;
+}
+.dark-band-inner { max-width: 1280px; margin: 0 auto; }
+.dark-band .section-title { color: var(--white); }
+
+/* ===== ACTIVITIES GRID HOME ===== */
+.activities-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--gray-light);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.activity-tile {
+  padding: 40px 28px;
+  border-right: 1px solid var(--gray-light);
+  border-bottom: 1px solid var(--gray-light);
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+}
+.activity-tile:hover { background: var(--navy); }
+.activity-tile:hover .act-name { color: var(--white); }
+.activity-tile:hover .act-icon { background: rgba(232,98,26,0.2); }
+.activity-tile:nth-child(4n) { border-right: none; }
+.activity-tile:nth-last-child(-n+3) { border-bottom: none; }
+.act-icon {
+  font-size: 28px;
+  margin-bottom: 16px;
+  display: block;
+  width: 52px; height: 52px;
+  background: var(--off-white);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 16px;
+  transition: var(--transition);
+}
+.act-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--navy);
+  letter-spacing: 0.04em;
+  transition: var(--transition);
+}
+.act-arrow {
+  position: absolute;
+  right: 16px; bottom: 16px;
+  font-size: 18px;
+  color: var(--orange);
+  opacity: 0;
+  transition: var(--transition);
+}
+.activity-tile:hover .act-arrow { opacity: 1; }
+
+/* ===== ZONES SECTION ===== */
+.zones-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.zone-card {
+  background: var(--navy);
+  border-radius: 8px;
+  padding: 40px 32px;
+  border-bottom: 3px solid var(--orange);
+}
+.zone-card .zone-icon { font-size: 32px; margin-bottom: 16px; display: block; }
+.zone-card h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--white);
+  margin-bottom: 8px;
+}
+.zone-card p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.7; }
+
+/* ===== CTA BAND ===== */
+.cta-band {
+  background: var(--orange);
+  padding: 80px 32px;
+  text-align: center;
+}
+.cta-band h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(32px, 4vw, 52px);
+  color: var(--white);
+  margin-bottom: 16px;
+  letter-spacing: -0.01em;
+}
+.cta-band p { font-size: 18px; color: rgba(255,255,255,0.85); margin-bottom: 36px; font-family: 'Lora', serif; }
+.btn-white {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--white);
+  color: var(--orange);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+}
+.btn-white:hover { background: var(--navy); color: var(--white); transform: translateY(-2px); }
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--navy-dark);
+  padding: 80px 32px 32px;
+  border-top: 3px solid var(--orange);
+}
+.footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 60px;
+}
+.footer-brand .logo-main { font-size: 32px; }
+.footer-brand p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.75;
+  margin-top: 16px;
+  max-width: 280px;
+}
+.footer-col h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 20px;
+}
+.footer-col a {
+  display: block;
+  font-size: 14px;
+  color: rgba(255,255,255,0.55);
+  padding: 5px 0;
+  transition: var(--transition);
+  cursor: pointer;
+}
+.footer-col a:hover { color: var(--white); padding-left: 6px; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.3); }
+
+/* ===== SUB-PAGE HERO (smaller) ===== */
+.sub-hero {
+  min-height: 65vh;
+  background-image: url(IMAGE/shop3.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-top: 72px;
+}
+.sub-hero-ex-in {
+  min-height: 65vh;
+  background-image: url(IMAGE/logistic.jpg);
+  background-repeat: no-repeat;
+ background-size: 100% 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-top: 72px;
+}
+.sub-hero-con {
+  min-height: 65vh;
+  background-image: url(IMAGE/build.jpg);
+  background-repeat: no-repeat;
+ background-size: 100% 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-top: 72px;
+}
+.sub-hero-ene {
+  min-height: 65vh;
+  background-image: url(IMAGE/ene1.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-top: 72px;
+}
+.sub-hero-agri {
+  min-height: 65vh;
+  background-image: url(IMAGE/farm4.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-top: 72px;
+}
+.sub-hero-eco {
+  min-height: 65vh;
+  background-image: url(IMAGE/echoturist2.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-top: 72px;
+}
+.sub-hero-com {
+  min-height: 65vh;
+  background-image: url(IMAGE/shop3.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-top: 72px;
+}
+.sub-hero-ser {
+  min-height: 65vh;
+  background-color: #111b30;
+  background-image: url();
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-top: 72px;
+}
+.sub-hero h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(44px, 6vw, 80px);
+  color: var(--white);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  margin-bottom: 24px;
+}
+.all-h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(44px, 6vw, 80px);
+  color: var(--white);
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  margin-bottom: 24px;
+}
+.sub-hero h1 em { font-style: normal; color: var(--orange); }
+.sub-hero .hero-sub { max-width: 600px; }
+
+/* ===== ACTIVITIES LIST ===== */
+.activity-detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.activity-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px;
+  background: var(--off-white);
+  border-radius: 6px;
+  border-left: 3px solid var(--orange);
+  transition: var(--transition);
+}
+.activity-item:hover { background: var(--gray-light); transform: translateX(4px); }
+.activity-item .bullet {
+  width: 8px; height: 8px;
+  background: var(--orange);
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 8px;
+}
+.activity-item strong {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--navy);
+  display: block;
+  margin-bottom: 4px;
+  letter-spacing: 0.03em;
+}
+.activity-item p { font-size: 14px; color: var(--text-mid); line-height: 1.6; }
+
+/* ===== CONTACT FORM ===== */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 80px;
+  align-items: start;
+}
+.contact-info h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  color: var(--navy);
+  margin-bottom: 24px;
+}
+.contact-item {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.contact-item .ci-icon {
+  width: 44px; height: 44px;
+  background: rgba(232,98,26,0.1);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-size: 18px;
+}
+.contact-item strong { display: block; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--orange); margin-bottom: 4px; }
+.contact-item p { font-size: 15px; color: var(--text-mid); }
+.form-group { margin-bottom: 20px; }
+.form-group label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 14px 18px;
+  background: var(--off-white);
+  border: 1.5px solid var(--gray-light);
+  border-radius: var(--radius);
+  font-family: 'Barlow', sans-serif;
+  font-size: 15px;
+  color: var(--text-dark);
+  transition: var(--transition);
+  outline: none;
+  appearance: none;
+}
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus { border-color: var(--orange); background: var(--white); }
+.form-group textarea { min-height: 140px; resize: vertical; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* ===== PROCESS STEPS ===== */
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  position: relative;
+}
+.process-steps::before {
+  content: '';
+  position: absolute;
+  top: 32px;
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--orange), var(--brown));
+}
+.step-item { padding: 0 24px; text-align: center; position: relative; }
+.step-num {
+  width: 64px; height: 64px;
+  background: var(--navy);
+  border: 3px solid var(--orange);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 24px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 24px;
+  color: var(--orange);
+  position: relative;
+  z-index: 1;
+}
+.step-item h4 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--navy);
+  margin-bottom: 8px;
+  letter-spacing: 0.03em;
+}
+.step-item p { font-size: 14px; color: var(--text-mid); line-height: 1.65; }
+
+/* ===== TWO-COL FEATURES ===== */
+.features-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+.feature-block {
+  padding: 40px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-light);
+}
+.feature-block h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: var(--navy);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.feature-block p { font-size: 15px; color: var(--text-mid); line-height: 1.7; }
+.feature-list { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+.feature-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text-mid);
+}
+.feature-list li::before {
+  content: '';
+  width: 6px; height: 6px;
+  background: var(--orange);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ===== TESTIMONIAL / HIGHLIGHT QUOTE ===== */
+.quote-block {
+  background: var(--navy);
+  border-radius: 8px;
+  padding: 60px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.quote-block::before {
+  content: '"';
+  position: absolute;
+  top: -30px; left: 30px;
+  font-size: 200px;
+  font-family: 'Lora', serif;
+  color: rgba(232,98,26,0.1);
+  line-height: 1;
+}
+.quote-block p {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 22px;
+  color: var(--white);
+  line-height: 1.75;
+  max-width: 680px;
+  margin: 0 auto 24px;
+  position: relative;
+  z-index: 1;
+}
+.quote-block cite {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--orange);
+}
+
+/* ===== STATS ROW ===== */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--gray-light);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.stat-box {
+  padding: 48px 32px;
+  border-right: 1px solid var(--gray-light);
+  text-align: center;
+}
+.stat-box:last-child { border-right: none; }
+.stat-box .num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 56px;
+  color: var(--orange);
+  line-height: 1;
+  display: block;
+}
+.stat-box .lbl {
+  font-size: 13px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  margin-top: 8px;
+  display: block;
+}
+
+/* ===== ANIMATIONS ===== */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 0.7s ease forwards;
+}
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.35s; }
+.delay-4 { animation-delay: 0.5s; }
+
+/* ===== MOBILE ===== */
+@media (max-width: 960px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 72px; left: 0; right: 0;
+    background: var(--navy-dark);
+    padding: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .hero h1 { font-size: 52px; }
+  .split { grid-template-columns: 1fr; }
+  .activities-grid { grid-template-columns: repeat(2,1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .process-steps { grid-template-columns: 1fr 1fr; }
+  .process-steps::before { display: none; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  .zones-grid { grid-template-columns: 1fr; }
+  .features-split { grid-template-columns: 1fr; }
+  .hero-stats { position: static; margin-top: 48px; justify-content: flex-start; }
+  .cards-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .activities-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .stats-row { grid-template-columns: 1fr; }
+  .stat-box { border-right: none; border-bottom: 1px solid var(--gray-light); }
+  .process-steps { grid-template-columns: 1fr; }
+  .section { padding: 60px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAVIGATION ===== -->
+<nav id="mainNav">
+  <div class="nav-inner">
+    <div class="logo" onclick="showPage('home')">
+      <div class="logo-main">ELAN <span>&amp; FILS</span></div>
+      <div class="logo-sub">SARL</div>
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a onclick="showPage('home')" class="active" id="nav-home">Home</a></li>
+      <li><a onclick="showPage('about')" id="nav-about">About</a></li>
+      <li class="dropdown">
+        <a id="nav-activities">Activities ▾</a>
+        <div class="dropdown-menu">
+          <a onclick="showPage('import-export')">🚢 Import – Export</a>
+          <a onclick="showPage('btp')">🏗️ BTP & Construction</a>
+          <a onclick="showPage('energy')">⚡ Renewable Energy</a>
+          <a onclick="showPage('agro')">🌾 Agri-Food & Nurseries</a>
+          <a onclick="showPage('eco')">🌿 Ecotourism</a>
+          <a onclick="showPage('commerce')">🛒 General Commerce</a>
+          <a onclick="showPage('services')">🧩 Professional Services</a>
+        </div>
+      </li>
+      
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ================================================================ -->
+<!-- HOME PAGE -->
+<!-- ================================================================ -->
+<div class="page active" id="page-home">
+
+  <section class="hero">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-accent"></div>
+    <div class="hero-accent-2"></div>
+    <div class="hero-content">
+      <div class="hero-tag fade-up">Multisectoral Excellence · Cameroon</div>
+      <h1 class="fade-up delay-1">
+        Building Tomorrow,
+        <em>Today.</em>
+      </h1>
+      <p class="hero-sub fade-up delay-2">
+        Élan &amp; Fils SARL is a dynamic multisectoral company delivering innovative, sustainable solutions across trade, construction, energy, agriculture, and services.
+      </p>
+      <div class="hero-actions fade-up delay-3">
+        <button class="btn-primary" onclick="showPage('about')">Discover Our Story →</button>
+        <button class="btn-outline" onclick="showPage('contact')">Get In Touch</button>
+      </div>
+    </div>
+    <div class="hero-stats fade-up delay-4">
+      <div class="stat-item">
+        <div class="stat-num">7</div>
+        <div class="stat-label">Activity Sectors</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3+</div>
+        <div class="stat-label">Regions Served</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">Commitment</div>
+      </div>
+    </div>
+    <div class="hero-stripe"></div>
+  </section>
+
+  <!-- Our Domains -->
+  <div class="section">
+    <div class="section-tag">What We Do</div>
+    <h2 class="section-title">Our Domains of <span>Intervention</span></h2>
+    <p class="section-desc">From international trade to green construction, agri-food to ecotourism — we deliver integrated, sector-spanning solutions.</p>
+
+    <div class="activities-grid">
+      <div class="activity-tile" onclick="showPage('import-export')">
+        <div class="act-icon">🚢</div>
+        <div class="act-name">Import – Export</div>
+        <div class="act-arrow">→</div>
+      </div>
+      <div class="activity-tile" onclick="showPage('btp')">
+        <div class="act-icon">🏗️</div>
+        <div class="act-name">BTP & Construction</div>
+        <div class="act-arrow">→</div>
+      </div>
+      <div class="activity-tile" onclick="showPage('energy')">
+        <div class="act-icon">⚡</div>
+        <div class="act-name">Renewable Energy</div>
+        <div class="act-arrow">→</div>
+      </div>
+      <div class="activity-tile" onclick="showPage('agro')">
+        <div class="act-icon">🌾</div>
+        <div class="act-name">Agri-Food & Nurseries</div>
+        <div class="act-arrow">→</div>
+      </div>
+      <div class="activity-tile" onclick="showPage('eco')">
+        <div class="act-icon">🌿</div>
+        <div class="act-name">Ecotourism</div>
+        <div class="act-arrow">→</div>
+      </div>
+      <div class="activity-tile" onclick="showPage('commerce')">
+        <div class="act-icon">🛒</div>
+        <div class="act-name">General Commerce</div>
+        <div class="act-arrow">→</div>
+      </div>
+      <div class="activity-tile" onclick="showPage('services')">
+        <div class="act-icon">🧩</div>
+        <div class="act-name">Professional Services</div>
+        <div class="act-arrow">→</div>
+      </div>
+      <div class="activity-tile" style="background:var(--orange); cursor:default;">
+        <div class="act-icon" style="background:rgba(255,255,255,0.2);">🌍</div>
+        <div class="act-name" style="color:white;">Active across Africa & beyond</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="dark-band">
+    <div class="dark-band-inner">
+      <div class="stats-row" style="border-color:rgba(255,255,255,0.1);">
+        <div class="stat-box" style="border-color:rgba(255,255,255,0.1);">
+          <span class="num">7</span>
+          <span class="lbl" style="color:rgba(255,255,255,0.5);">Activity Sectors</span>
+        </div>
+        <div class="stat-box" style="border-color:rgba(255,255,255,0.1);">
+          <span class="num">3+</span>
+          <span class="lbl" style="color:rgba(255,255,255,0.5);">Geographic Zones</span>
+        </div>
+        <div class="stat-box" style="border-color:rgba(255,255,255,0.1);">
+          <span class="num">∞</span>
+          <span class="lbl" style="color:rgba(255,255,255,0.5);">Solutions Delivered</span>
+        </div>
+        <div class="stat-box" style="border-color:rgba(255,255,255,0.1);">
+          <span class="num">1</span>
+          <span class="lbl" style="color:rgba(255,255,255,0.5);">Reliable Partner</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Why Us -->
+  <div class="section">
+    <div class="split">
+      <div>
+        <div class="section-tag">Why Choose Us</div>
+        <h2 class="section-title">A Partner Built on <span>Values</span></h2>
+        <p class="section-desc">Élan & Fils SARL combines sectoral expertise with a commitment to sustainability, quality, and client success.</p>
+        <button class="btn-primary" onclick="showPage('about')">About Our Company →</button>
+      </div>
+      <div class="split-visual">
+        <div class="values-list">
+          <div class="value-item">
+            <div class="value-dot"></div>
+            <div><strong>Professionalism</strong><p>Every project executed with rigour, precision, and accountability.</p></div>
+          </div>
+          <div class="value-item">
+            <div class="value-dot"></div>
+            <div><strong>Innovation</strong><p>Forward-looking solutions adapted to evolving market needs.</p></div>
+          </div>
+          <div class="value-item">
+            <div class="value-dot"></div>
+            <div><strong>Quality</strong><p>Uncompromising standards in products, services, and execution.</p></div>
+          </div>
+          <div class="value-item">
+            <div class="value-dot"></div>
+            <div><strong>Sustainability</strong><p>Long-term thinking for environmental and social impact.</p></div>
+          </div>
+          <div class="value-item">
+            <div class="value-dot"></div>
+            <div><strong>Client Satisfaction</strong><p>Your goals are our goals — always.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Zones -->
+  <div class="dark-band">
+    <div class="dark-band-inner">
+      <div class="section-tag">Where We Operate</div>
+      <h2 class="section-title" style="color:white; margin-bottom:48px;">Our Zones of <span style="color:var(--orange);">Intervention</span></h2>
+      <div class="zones-grid">
+        <div class="zone-card">
+          <span class="zone-icon">🇨🇲</span>
+          <h3>Cameroon</h3>
+          <p>Operating across urban and rural zones nationwide, from Yaoundé to remote communities.</p>
+        </div>
+        <div class="zone-card">
+          <span class="zone-icon">🌍</span>
+          <h3>Central Africa</h3>
+          <p>Extending services and partnerships across the Central African region.</p>
+        </div>
+        <div class="zone-card">
+          <span class="zone-icon">🌐</span>
+          <h3>International</h3>
+          <p>Global reach for import-export operations and strategic commercial partnerships.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-band">
+    <h2>Ready to Start Your Project?</h2>
+    <p>Let's build something impactful together. Reach out to our team today.</p>
+    <button class="btn-white" onclick="showPage('contact')">Contact Us Now →</button>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo-main" style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:28px;color:#fff;">ELAN <span style="color:var(--orange);">&amp; FILS</span></div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.25em;color:var(--orange);text-transform:uppercase;">SARL</div>
+          <p>Multisectoral solutions for individuals, businesses, and institutions. Building a sustainable future across Cameroon and beyond.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a onclick="showPage('home')">Home</a>
+          <a onclick="showPage('about')">About Us</a>
+          <a onclick="showPage('contact')">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Activities</h4>
+          <a onclick="showPage('import-export')">Import – Export</a>
+          <a onclick="showPage('btp')">BTP</a>
+          <a onclick="showPage('energy')">Renewable Energy</a>
+          <a onclick="showPage('agro')">Agri-Food</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a onclick="showPage('eco')">Ecotourism</a>
+          <a onclick="showPage('commerce')">Commerce</a>
+          <a onclick="showPage('services')">Services</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Élan & Fils SARL. All rights reserved. · Cameroon</p>
+        <p>Built with purpose.</p>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ================================================================ -->
+<!-- ABOUT PAGE -->
+<!-- ================================================================ -->
+<div class="page" id="page-about">
+  <section class="sub-hero">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-accent"></div>
+    <div class="hero-accent-2"></div>
+    <div class="hero-content" style="padding-top:24px;">
+      <div class="hero-tag">Our Story</div>
+      <h1>About <em>Élan & Fils</em></h1>
+      <p class="hero-sub">A dynamic enterprise with a mission to drive economic, social, and environmental development through multisectoral expertise.</p>
+    </div>
+    <div class="hero-stripe"></div>
+  </section>
+
+  <div class="section">
+    <div class="split">
+      <div>
+        <div class="section-tag">Who We Are</div>
+        <h2 class="section-title">An Integrated <span>Vision</span></h2>
+        <p class="section-desc">
+          Élan & Fils SARL is a multisectoral company specialised in import-export, civil engineering, renewable energies, green construction, agri-food, ecotourism, general commerce, and professional services.
+        </p>
+        <p style="color:var(--text-mid);font-size:15px;line-height:1.8;margin-bottom:32px;">
+          Our integrated approach combines commerce, construction, energy, agriculture and services to offer complete and durable solutions. With a committed team and an innovation-driven vision, Élan & Fils SARL positions itself as a reliable partner for multisectoral project development.
+        </p>
+        <button class="btn-primary" onclick="showPage('contact')">Partner With Us →</button>
+      </div>
+      <div class="split-visual">
+        <div style="text-align:center;position:relative;z-index:1;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:80px;color:var(--orange);line-height:1;">ÉLAN</div>
+          <div style="font-family:'Lora',serif;font-style:italic;font-size:18px;color:rgba(255,255,255,0.6);margin-top:8px;">"Energy, Drive, and Purpose"</div>
+          <div style="width:60px;height:3px;background:var(--orange);margin:24px auto;"></div>
+          <p style="font-size:14px;color:rgba(255,255,255,0.5);line-height:1.7;">Serving Cameroon, Central Africa, and international markets with solutions built to last.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mission Vision Values -->
+  <div class="dark-band">
+    <div class="dark-band-inner">
+      <div class="cards-grid">
+        <div class="card" style="background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.08);">
+          <div class="card-icon">🎯</div>
+          <h3 style="color:white;">Our Mission</h3>
+          <p style="color:rgba(255,255,255,0.6);">Provide innovative, sustainable, and effective solutions across our domains of intervention, contributing to economic, social, and environmental development.</p>
+        </div>
+        <div class="card" style="background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.08);">
+          <div class="card-icon">🔭</div>
+          <h3 style="color:white;">Our Vision</h3>
+          <p style="color:rgba(255,255,255,0.6);">Become a reference company in commerce, civil engineering, renewable energy, agri-food, and sustainable development in Africa and beyond.</p>
+        </div>
+        <div class="card" style="background:rgba(255,255,255,0.04);border-color:rgba(255,255,255,0.08);">
+          <div class="card-icon">🏛️</div>
+          <h3 style="color:white;">Our Values</h3>
+          <p style="color:rgba(255,255,255,0.6);">Professionalism · Innovation · Quality · Sustainability · Client Satisfaction. These pillars define every decision we make and every project we undertake.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Process -->
+  <div class="section">
+    <div class="section-tag">How We Work</div>
+    <h2 class="section-title" style="margin-bottom:80px;">Our <span>Approach</span></h2>
+    <div class="process-steps">
+      <div class="step-item">
+        <div class="step-num">01</div>
+        <h4>Understand</h4>
+        <p>We listen carefully to understand your specific needs and challenges.</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">02</div>
+        <h4>Plan</h4>
+        <p>We design a tailored, integrated solution adapted to your context.</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">03</div>
+        <h4>Execute</h4>
+        <p>We deliver with rigour, precision, and full accountability.</p>
+      </div>
+      <div class="step-item">
+        <div class="step-num">04</div>
+        <h4>Support</h4>
+        <p>We stand by you after delivery for lasting impact and satisfaction.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-band">
+    <h2>Join Our Network of Partners</h2>
+    <p>We work with individuals, enterprises, and institutions across sectors.</p>
+    <button class="btn-white" onclick="showPage('contact')">Get in Touch →</button>
+  </div>
+  <div id="about-footer"></div>
+</div>
+
+<!-- ================================================================ -->
+<!-- IMPORT-EXPORT PAGE -->
+<!-- ================================================================ -->
+<div class="page" id="page-import-export">
+  <section class="sub-hero-ex-in" background-im>
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-accent"></div>
+    <div class="hero-content" style="padding-top:24px;">
+      <div class="hero-tag">🚢 Trade & Commerce</div>
+      <h1 class="all-h1">Import – <em>Export</em></h1>
+      <p class="hero-sub">Bridging local markets with international trade through reliable logistics, distribution, and commercial transit services.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="showPage('contact')">Request a Quote →</button>
+        <button class="btn-outline" onclick="showPage('home')">All Activities</button>
+      </div>
+    </div>
+    <div class="hero-stripe"></div>
+  </section>
+
+  <div class="section">
+    <div class="section-tag">Our Services</div>
+    <h2 class="section-title">What We <span>Offer</span></h2>
+    <p class="section-desc">Élan & Fils SARL facilitates commercial exchanges between local and international markets, handling the full chain from sourcing to delivery.</p>
+    <div class="activity-detail-list">
+      <div class="activity-item"><div class="bullet"></div><div><strong>Importation of Diverse Products</strong><p>Sourcing and importing a wide range of goods to meet local demand, managing all customs and compliance requirements.</p></div></div>
+      <div class="activity-item"><div class="bullet"></div><div><strong>Exportation of Local Products</strong><p>Promoting and exporting quality Cameroonian and Central African products to international markets.</p></div></div>
+      <div class="activity-item"><div class="bullet"></div><div><strong>Logistics & Transit</strong><p>End-to-end logistics management including freight, transit, and last-mile delivery across the region.</p></div></div>
+      <div class="activity-item"><div class="bullet"></div><div><strong>Commercial Distribution</strong><p>Distributing products efficiently to retailers, institutions, and end consumers.</p></div></div>
+      <div class="activity-item"><div class="bullet"></div><div><strong>Supply & Sourcing</strong><p>Strategic sourcing and procurement services for businesses seeking reliable supply chains.</p></div></div>
+    </div>
+  </div>
+
+  <div class="dark-band">
+    <div class="dark-band-inner">
+      <div class="quote-block">
+        <p>"We connect Cameroon to the world — and bring the world to Cameroon — through trusted, transparent, and timely trade solutions."</p>
+        <cite>— Élan & Fils SARL, Import-Export Division</cite>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="features-split">
+      <div class="feature-block">
+        <h3>🌍 International Reach</h3>
+        <p>Our network spans multiple continents, giving our clients access to global markets and competitive pricing.</p>
+        <ul class="feature-list">
+          <li>Europe, Asia & Americas sourcing</li>
+          <li>Bilateral trade partnerships</li>
+          <li>Customs clearance expertise</li>
+          <li>Regulatory compliance support</li>
+        </ul>
+      </div>
+      <div class="feature-block">
+        <h3>📦 Full-Chain Logistics</h3>
+        <p>From origin to destination, we manage every step of the supply chain with precision and transparency.</p>
+        <ul class="feature-list">
+          <li>Sea, air and road freight</li>
+          <li>Warehousing & storage</li>
+          <li>Real-time cargo tracking</li>
+          <li>Last-mile delivery</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+    <!-- project -->
+<div class="dark-band">
+  <div class="dark-band-inner">
+    <div class="section-tag">Where We Operate</div>
+    <h2 class="section-title" style="color:white; margin-bottom:48px;">Projects and <span style="color:var(--orange, #d4a373);">Intervention</span></h2>
+    
+    <div class="zones-grid">
+      <div class="zone-card">
+        <div class="zone-image-wrapper">
+          <img src="IMAGE/import-export1.jpg" alt="Cameroon Forestry Project">
+          <span class="zone-icon">🇨🇲</span>
+        </div>
+        <div class="zone-card-body">
+          <h3>Cameroon</h3>
+          <p>Operating across urban and rural zones nationwide, from Yaoundé to remote communities.</p>
+        </div>
+      </div>
+
+      <div class="zone-card">
+        <div class="zone-image-wrapper">
+          <img src="IMAGE/central-africa-project.jpg" alt="Central Africa Regional Support">
+          <span class="zone-icon">🌍</span>
+        </div>
+        <div class="zone-card-body">
+          <h3>Central Africa</h3>
+          <p>Extending services and partnerships across the Central African region.</p>
+        </div>
+      </div>
+
+      <div class="zone-card">
+        <div class="zone-image-wrapper">
+          <img src="IMAGE/international-partnership.jpg" alt="Global Strategic Partnerships">
+          <span class="zone-icon">🌐</span>
+        </div>
+        <div class="zone-card-body">
+          <h3>International</h3>
+          <p>Global reach for import-export operations and strategic commercial partnerships.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  <div class="cta-band">
+    <h2>Let's Trade Together</h2>
+    <p>Whether importing or exporting, we have the expertise to make it seamless.</p>
+    <button class="btn-white" onclick="showPage('contact')">Contact Our Trade Team →</button>
+  </div>
+  <div id="ie-footer"></div>
+</div>
+
+<!-- ================================================================ -->
+<!-- BTP PAGE -->
+<!-- ================================================================ -->
+<div class="page" id="page-btp">
+  <section class="sub-hero-con">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-accent"></div>
+    <div class="hero-content" style="padding-top:24px;">
+      <div class="hero-tag">🏗️ Civil Engineering</div>
+      <h1 class="all-h1">Building &<em>Public Works</em></h1>
+      <p class="hero-sub">Designing and realising modern, durable construction projects — residential, commercial, and community infrastructure.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="showPage('contact')">Start a Project →</button>
+        <button class="btn-outline" onclick="showPage('home')">All Activities</button>
+      </div>
+    </div>
+    <div class="hero-stripe"></div>
+  </section>
+
+  <div class="section">
+    <div class="section-tag">Construction Services</div>
+    <h2 class="section-title">What We <span>Build</span></h2>
+    <p class="section-desc">Élan & Fils SARL takes on construction projects from concept to completion, delivering quality structures built to last.</p>
+    <div class="activity-detail-list">
+      <div class="activity-item"><div class="bullet"></div><div><strong>Building Construction</strong><p>Residential, commercial, and institutional buildings designed with modern standards and local context in mind.</p></div></div>
+      <div class="activity-item"><div class="bullet"></div><div><strong>Public Works</strong><p>Roads, bridges, drainage systems, and public infrastructure that serve communities for decades.</p></div></div>
+      <div class="activity-item"><div class="bullet"></div><div><strong>Infrastructure Development</strong><p>Planning and development of essential infrastructure for urban and rural zones.</p></div></div>
+      <div class="activity-item"><div class="bullet"></div><div><strong>Rehabilitation & Renovation</strong><p>Restoring and upgrading existing structures to meet current standards and needs.</p></div></div>
+    </div>
+  </div>
+
+  <div class="dark-band">
+    <div class="dark-band-inner">
+      <div class="section-tag">Our Process</div>
+      <h2 class="section-title" style="color:white;margin-bottom:80px;">From Blueprint to <span style="color:var(--orange);">Reality</span></h2>
+      <div class="process-steps">
+        <div class="step-item">
+          <div class="step-num">01</div>
+          <h4 style="color:white;">Design</h4>
+          <p style="color:rgba(255,255,255,0.6);">Architectural planning and engineering assessment.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-num">02</div>
+          <h4 style="color:white;">Permits</h4>
+          <p style="color:rgba(255,255,255,0.6);">Full regulatory compliance and approvals.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-num">03</div>
+          <h4 style="color:white;">Build</h4>
+          <p style="color:rgba(255,255,255,0.6);">Construction with quality materials and skilled teams.</p>
+        </div>
+        <div class="step-item">
+          <div class="step-num">04</div>
+          <h4 style="color:white;">Deliver</h4>
+          <p style="color:rgba(255,255,255,0.6);">Handover with full documentation and warranty.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <!-- project -->
+<div class="dark-band">
+  <div class="dark-band-inner">
+    <div class="section-tag">Where We Operate</div>
+    <h2 class="section-title" style="color:white; margin-bottom:48px;">Projects and <span style="color:var(--orange, #d4a373);">Intervention</span></h2>
+    
+    <div class="zones-grid">
+      <div class="zone-card">
+        <div class="zone-image-wrapper">
+          <img src="IMAGE/build.jpg" alt="Cameroon Forestry Project">
+          <span class="zone-icon">🇨🇲</span>
+        </div>
+        <div class="zone-card-body">
+          <h3>Cameroon</h3>
+          <p>Operating across urban and rural zones nationwide, from Yaoundé to remote communities.</p>
+        </div>
+      </div>
+
+      <div class="zone-card">
+        <div class="zone-image-wrapper">
+          <img src="IMAGE/central-africa-project.jpg" alt="Central Africa Regional Support">
+          <span class="zone-icon">🌍</span>
+        </div>
+        <div class="zone-card-body">
+          <h3>Central Africa</h3>
+          <p>Extending services and partnerships across the Central African region.</p>
+        </div>
+      </div>
+
+      <div class="zone-card">
+        <div class="zone-image-wrapper">
+          <img src="IMAGE/international-partnership.jpg" alt="Global Strategic Partnerships">
+          <span class="zone-icon">🌐</span>
+        </div>
+        <div class="zone-card-body">
+          <h3>International</h3>
+          <p>Global reach for import-export operations and strategic commercial partnerships.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  <div class="cta-band">
+    <h2>Have a Construction Project?</h2>
+    <p>Tell us your vision. We'll make it a reality.</p>
+    <button class="btn-white" onclick="showPage('contact')">Discuss Your Project →</button>
+  </div>
+  <div id="btp-footer"></div>
+</div>
+
+<!-- ================================================================ -->
+<!-- ENERGY PAGE -->
+<!-- ================================================================ -->
+<div class="page" id="page-energy">
+  <section class="sub-hero-ene">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-accent"></div>
+    <div class="hero-content" style="padding-top:24px;">
+      <div class="hero-tag">⚡ Green Solutions</div>
+      <h1 class="all-h1">Renewable Energy &<em>Green Building</em></h1>
+      <p class="hero-sub">Innovative, sustainable energy solutions and eco-friendly construction — reducing environmental impact while improving performance.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="showPage('contact')">Get an Energy Audit →</button>
+        <button class="btn-outline" onclick="showPage('home')">All Activities</button>
+      </div>
+    </div>
+    <div class="hero-stripe"></div>
+  </section>
+
+  <div class="section">
+    <div class="section-tag">Energy & Green Construction</div>
+    <h2 class="section-title">Sustainable <span>Solutions</span></h2>
+    <p class="section-desc">We champion the energy transition and green building through cutting-edge solutions designed to reduce carbon footprint and improve efficiency.</p>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-icon">☀️</div>
+        <h3>Solar Photovoltaic Systems</h3>
+        <p>Installation of high-performance solar PV systems for homes, businesses, and off-grid communities.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔋</div>
+        <h3>Rural Electrification</h3>
+        <p>Autonomous energy solutions bringing reliable electricity to rural and isolated areas.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🏠</div>
+        <h3>Low-Energy Buildings</h3>
+        <p>Designing buildings with optimised insulation, ventilation, and passive cooling strategies.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌱</div>
+        <h3>Eco-Friendly Construction</h3>
+        <p>Building homes and structures using local, sustainable materials with minimal environmental impact.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔩</div>
+        <h3>Energy Efficiency Integration</h3>
+        <p>Retrofitting existing buildings with energy-efficient technologies and smart systems.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌿</div>
+        <h3>Green Infrastructure</h3>
+        <p>Sustainable infrastructure solutions that combine performance with environmental responsibility.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="dark-band">
+    <div class="dark-band-inner">
+      <div class="quote-block">
+        <p>"We believe the buildings of tomorrow must be powered by the sun and built from the earth — efficient, affordable, and lasting."</p>
+        <cite>— Élan & Fils SARL, Energy & Green Construction Division</cite>
+      </div>
+    </div>
+  </div>
+   <!-- project -->
+<div class="dark-band">
+  <div class="dark-band-inner">
+    <div class="section-tag">Where We Operate</div>
+    <h2 class="section-title" style="color:white; margin-bottom:48px;">Projects and <span style="color:var(--orange, #d4a373);">Intervention</span></h2>
+    
+    <div class="zones-grid">
+      <div class="zone-card">
+        <div class="zone-image-wrapper">
+          <img src="IMAGE/enegy1.jpg" alt="Cameroon Forestry Project">
+          <span class="zone-icon">🇨🇲</span>
+        </div>
+        <div class="zone-card-body">
+          <h3>Cameroon</h3>
+          <p>Operating across urban and rural zones nationwide, from Yaoundé to remote communities.</p>
+        </div>
+      </div>
+
+      <div class="zone-card">
+        <div class="zone-image-wrapper">
+          <img src="IMAGE/central-africa-project.jpg" alt="Central Africa Regional Support">
+          <span class="zone-icon">🌍</span>
+        </div>
+        <div class="zone-card-body">
+          <h3>Central Africa</h3>
+          <p>Extending services and partnerships across the Central African region.</p>
+        </div>
+      </div>
+
+      <div class="zone-card">
+        <div class="zone-image-wrapper">
+          <img src="IMAGE/international-partnership.jpg" alt="Global Strategic Partnerships">
+          <span class="zone-icon">🌐</span>
+        </div>
+        <div class="zone-card-body">
+          <h3>International</h3>
+          <p>Global reach for import-export operations and strategic commercial partnerships.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  <div class="cta-band">
+    <h2>Power Your Future with Clean Energy</h2>
+    <p>Solar systems, green buildings, rural electrification — let's talk solutions.</p>
+    <button class="btn-white" onclick="showPage('contact')">Contact Our Energy Team →</button>
+  </div>
+  <div id="energy-footer"></div>
+</div>
+
+<!-- ================================================================ -->
+<!-- AGRO PAGE -->
+<!-- ================================================================ -->
+<div class="page" id="page-agro">
+  <section class="sub-hero-agri">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-accent"></div>
+    <div class="hero-content" style="padding-top:24px;">
+      <div class="hero-tag">🌾 Agriculture & Food</div>
+      <h1 class="all-h1">Agri-Food &<em>Nurseries</em></h1>
+      <p class="hero-sub">Supporting agricultural production, food transformation, and sustainable farming through quality inputs and market access.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="showPage('contact')">Partner With Us →</button>
+        <button class="btn-outline" onclick="showPage('home')">All Activities</button>
+      </div>
+    </div>
+    <div class="hero-stripe"></div>
+  </section>
+
+  <div class="section">
+    <div class="section-tag">Agriculture & Food Processing</div>
+    <h2 class="section-title">From Farm to <span>Table</span></h2>
+    <p class="section-desc">We intervene across the full agri-food value chain — from cultivation and nurseries to transformation and commercial distribution.</p>
+    <div class="activity-detail-list">
+      <div class="activity-item"><div class="bullet"></div><div><strong>Agricultural Production</strong><p>Supporting smallholder and commercial farmers with inputs, training, and market linkages.</p></div></div>
+      <div class="activity-item"><div class="bullet"></div><div><strong>Agri-Food Transformation</strong><p>Processing raw agricultural products into value-added food products for local and export markets.</p></div></div>
+      <div class="activity-item"><div class="bullet"></div><div><strong>Food Distribution</strong><p>Distributing quality food products to retailers, wholesalers, and institutional buyers.</p></div></div>
+      <div class="activity-item"><div class="bullet"></div><div><strong>Nursery Plant Sales</strong><p>Production and sale of seedlings, ornamental plants, and fruit tree seedlings for agriculture and landscaping.</p></div></div>
+      <div class="activity-item"><div class="bullet"></div><div><strong>Mushroom Production & Sales</strong><p>Commercial cultivation and distribution of edible and medicinal mushrooms — a growing agri-food sector.</p></div></div>
+      <div class="activity-item"><div class="bullet"></div><div><strong>Sustainable Agriculture Support</strong><p>Promoting agroecological practices that protect biodiversity and ensure long-term productivity.</p></div></div>
+    </div>
+  </div>
+
+   <!-- project -->
+<div class="dark-band">
+  <div class="dark-band-inner">
+    <div class="section-tag">Where We Operate</div>
+    <h2 class="section-title" style="color:white; margin-bottom:48px;">Projects and <span style="color:var(--orange, #d4a373);">Intervention</span></h2>
+    
+    <div class="zones-grid">
+      <div class="zone-card">
+        <div class="zone-image-wrapper">
+          <img src="IMAGE/Champigno Nkolsit.jpeg" alt="Cameroon Forestry Project">
+          <span class="zone-icon">🇨🇲</span>
+        </div>
+        <div class="zone-card-body">
+          <h3>Cameroon</h3>
+          <p>Operating across urban and rural zones nationwide, from Yaoundé to remote communities.</p>
+        </div>
+      </div>
+
+      <div class="zone-card">
+        <div class="zone-image-wrapper">
+          <img src="IMAGE/central-africa-project.jpg" alt="Central Africa Regional Support">
+          <span class="zone-icon">🌍</span>
+        </div>
+        <div class="zone-card-body">
+          <h3>Central Africa</h3>
+          <p>Extending services and partnerships across the Central African region.</p>
+        </div>
+      </div>
+
+      <div class="zone-card">
+        <div class="zone-image-wrapper">
+          <img src="IMAGE/international-partnership.jpg" alt="Global Strategic Partnerships">
+          <span class="zone-icon">🌐</span>
+        </div>
+        <div class="zone-card-body">
+          <h3>International</h3>
+          <p>Global reach for import-export operations and strategic commercial partnerships.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  <div class="cta-band">
+    <h2>Grow With Us</h2>
+    <p>Farmers, processors, distributors — we are your partner across the value chain.</p>
+    <button class="btn-white" onclick="showPage('contact')">Talk to Our Agriculture Team →</button>
+  </div>
+  <div id="agro-footer"></div>
+</div>
+
+<!-- ================================================================ -->
+<!-- ECO PAGE -->
+<!-- ================================================================ -->
+<div class="page" id="page-eco">
+  <section class="sub-hero-eco">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-accent"></div>
+    <div class="hero-content" style="padding-top:24px;">
+      <div class="hero-tag">🌿 Nature & Culture</div>
+      <h1 class="all-h1">Ecotourism &<em>Natural Heritage</em></h1>
+      <p class="hero-sub">Developing ecotourism initiatives that valorise Cameroon's extraordinary natural and cultural resources sustainably.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="showPage('contact')">Plan a Visit →</button>
+        <button class="btn-outline" onclick="showPage('home')">All Activities</button>
+      </div>
+    </div>
+    <div class="hero-stripe"></div>
+  </section>
+
+  <div class="section">
+    <div class="section-tag">Ecotourism Initiatives</div>
+    <h2 class="section-title">Explore with <span>Purpose</span></h2>
+    <p class="section-desc">Élan & Fils SARL develops ecotourism sites and experiences that connect visitors with nature while benefiting local communities.</p>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-icon">🏕️</div>
+        <h3>Ecotourism Site Development</h3>
+        <p>Creating and managing eco-certified tourism destinations that minimise environmental impact.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🛤️</div>
+        <h3>Ecological Tourist Circuits</h3>
+        <p>Curated itineraries through Cameroon's forests, highlands, and cultural landmarks.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌿</div>
+        <h3>Eco-Lodge Construction</h3>
+        <p>Designing and building sustainable lodges that harmonise with their natural surroundings.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🤝</div>
+        <h3>Community Tourism</h3>
+        <p>Tourism experiences that involve and benefit local communities directly.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🦋</div>
+        <h3>Biodiversity Valorisation</h3>
+        <p>Highlighting Cameroon's exceptional biodiversity through guided educational experiences.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="dark-band">
+    <div class="dark-band-inner">
+      <div class="quote-block">
+        <p>"Cameroon is one of Africa's most biodiverse nations. We are committed to sharing its wonders with the world — responsibly."</p>
+        <cite>— Élan & Fils SARL, Ecotourism Division</cite>
+      </div>
+    </div>
+  </div>
+
+   <!-- project -->
+<div class="dark-band">
+  <div class="dark-band-inner">
+    <div class="section-tag">Where We Operate</div>
+    <h2 class="section-title" style="color:white; margin-bottom:48px;">Projects and <span style="color:var(--orange, #d4a373);">Intervention</span></h2>
+    
+    <div class="zones-grid">
+      <div class="zone-card">
+        <div class="zone-image-wrapper">
+          <img src="IMAGE/import-export1.jpg" alt="Cameroon Forestry Project">
+          <span class="zone-icon">🇨🇲</span>
+        </div>
+        <div class="zone-card-body">
+          <h3>Cameroon</h3>
+          <p>Operating across urban and rural zones nationwide, from Yaoundé to remote communities.</p>
+        </div>
+      </div>
+
+      <div class="zone-card">
+        <div class="zone-image-wrapper">
+          <img src="IMAGE/central-africa-project.jpg" alt="Central Africa Regional Support">
+          <span class="zone-icon">🌍</span>
+        </div>
+        <div class="zone-card-body">
+          <h3>Central Africa</h3>
+          <p>Extending services and partnerships across the Central African region.</p>
+        </div>
+      </div>
+
+      <div class="zone-card">
+        <div class="zone-image-wrapper">
+          <img src="IMAGE/international-partnership.jpg" alt="Global Strategic Partnerships">
+          <span class="zone-icon">🌐</span>
+        </div>
+        <div class="zone-card-body">
+          <h3>International</h3>
+          <p>Global reach for import-export operations and strategic commercial partnerships.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  <div class="cta-band">
+    <h2>Discover Cameroon's Natural Wonders</h2>
+    <p>Plan an unforgettable, responsible ecotourism experience with us.</p>
+    <button class="btn-white" onclick="showPage('contact')">Plan Your Trip →</button>
+  </div>
+  <div id="eco-footer"></div>
+</div>
+
+<!-- ================================================================ -->
+<!-- COMMERCE PAGE -->
+<!-- ================================================================ -->
+<div class="page" id="page-commerce">
+  <section class="sub-hero-com">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-accent"></div>
+    <div class="hero-content" style="padding-top:24px;">
+      <div class="hero-tag">🛒 Trade & Supply</div>
+      <h1 class="all-h1">General<em>Commerce</em></h1>
+      <p class="hero-sub">A broad and reliable commercial offer — products, distribution, and supply adapted to the needs of the market.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="showPage('contact')">Enquire Now →</button>
+        <button class="btn-outline" onclick="showPage('home')">All Activities</button>
+      </div>
+    </div>
+    <div class="hero-stripe"></div>
+  </section>
+
+  <div class="section">
+    <div class="section-tag">Commerce & Distribution</div>
+    <h2 class="section-title">What We <span>Supply</span></h2>
+    <p class="section-desc">Élan & Fils SARL operates in general commerce offering a wide range of products and distribution services adapted to market needs.</p>
+    <div class="activity-detail-list">
+      <div class="activity-item"><div class="bullet"></div><div><strong>Sale of Diverse Products</strong><p>A broad product catalogue serving retail, industrial, and institutional clients across sectors.</p></div></div>
+      <div class="activity-item"><div class="bullet"></div><div><strong>Commercial Distribution</strong><p>Reliable distribution networks ensuring products reach the right markets at the right time.</p></div></div>
+      <div class="activity-item"><div class="bullet"></div><div><strong>Supply & Procurement</strong><p>Strategic sourcing services to help businesses maintain reliable, cost-effective supply chains.</p></div></div>
+      <div class="activity-item"><div class="bullet"></div><div><strong>Equipment Supply</strong><p>Supplying equipment and materials for industry, construction, agriculture, and institutions.</p></div></div>
+    </div>
+  </div>
+
+   <!-- project -->
+<div class="dark-band">
+  <div class="dark-band-inner">
+    <div class="section-tag">Where We Operate</div>
+    <h2 class="section-title" style="color:white; margin-bottom:48px;">Projects and <span style="color:var(--orange, #d4a373);">Intervention</span></h2>
+    
+    <div class="zones-grid">
+      <div class="zone-card">
+        <div class="zone-image-wrapper">
+          <img src="IMAGE/import-export1.jpg" alt="Cameroon Forestry Project">
+          <span class="zone-icon">🇨🇲</span>
+        </div>
+        <div class="zone-card-body">
+          <h3>Cameroon</h3>
+          <p>Operating across urban and rural zones nationwide, from Yaoundé to remote communities.</p>
+        </div>
+      </div>
+
+      <div class="zone-card">
+        <div class="zone-image-wrapper">
+          <img src="IMAGE/central-africa-project.jpg" alt="Central Africa Regional Support">
+          <span class="zone-icon">🌍</span>
+        </div>
+        <div class="zone-card-body">
+          <h3>Central Africa</h3>
+          <p>Extending services and partnerships across the Central African region.</p>
+        </div>
+      </div>
+
+      <div class="zone-card">
+        <div class="zone-image-wrapper">
+          <img src="IMAGE/international-partnership.jpg" alt="Global Strategic Partnerships">
+          <span class="zone-icon">🌐</span>
+        </div>
+        <div class="zone-card-body">
+          <h3>International</h3>
+          <p>Global reach for import-export operations and strategic commercial partnerships.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  <div class="cta-band">
+    <h2>Looking for a Reliable Supplier?</h2>
+    <p>We stock what you need and deliver where you are.</p>
+    <button class="btn-white" onclick="showPage('contact')">Request a Product List →</button>
+  </div>
+  <div id="commerce-footer"></div>
+</div>
+
+<!-- ================================================================ -->
+<!-- SERVICES PAGE -->
+<!-- ================================================================ -->
+<div class="page" id="page-services">
+  <section class="sub-hero-ser">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-accent"></div>
+    <div class="hero-content" style="padding-top:24px;">
+      <div class="hero-tag">🧩 Expertise & Support</div>
+      <h1 class="all-h1">Professional<em>Services</em></h1>
+      <p class="hero-sub">Technical guidance, project management, and multisectoral support to help you achieve your goals with confidence.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="showPage('contact')">Book a Consultation →</button>
+        <button class="btn-outline" onclick="showPage('home')">All Activities</button>
+      </div>
+    </div>
+    <div class="hero-stripe"></div>
+  </section>
+
+  <div class="section">
+    <div class="section-tag">Our Expertise</div>
+    <h2 class="section-title">How We <span>Support</span> You</h2>
+    <p class="section-desc">Our professional services team provides expert guidance, hands-on management, and end-to-end support tailored to your project's unique needs.</p>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-icon">📋</div>
+        <h3>Project Accompaniment</h3>
+        <p>We walk alongside you from ideation through execution, ensuring every phase is managed with care.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">💡</div>
+        <h3>Technical Advisory</h3>
+        <p>Expert technical advice across our sectors: construction, energy, agri-food, trade, and more.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <h3>Project Management</h3>
+        <p>Rigorous management of complex, multistakeholder projects to deliver on time and on budget.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🚛</div>
+        <h3>Logistics Services</h3>
+        <p>End-to-end logistics support including planning, coordination, and operational execution.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🌐</div>
+        <h3>Multisectoral Services</h3>
+        <p>Integrated services that cross sector boundaries — perfect for complex, multi-domain projects.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="dark-band">
+    <div class="dark-band-inner">
+      <div class="quote-block">
+        <p>"Our expertise is your advantage. We bring the knowledge, the network, and the commitment to make your project succeed."</p>
+        <cite>— Élan & Fils SARL, Professional Services</cite>
+      </div>
+    </div>
+  </div>
+
+   <!-- project -->
+<div class="dark-band">
+  <div class="dark-band-inner">
+    <div class="section-tag">Where We Operate</div>
+    <h2 class="section-title" style="color:white; margin-bottom:48px;">Projects and <span style="color:var(--orange, #d4a373);">Intervention</span></h2>
+    
+    <div class="zones-grid">
+      <div class="zone-card">
+        <div class="zone-image-wrapper">
+          <img src="IMAGE/import-export1.jpg" alt="Cameroon Forestry Project">
+          <span class="zone-icon">🇨🇲</span>
+        </div>
+        <div class="zone-card-body">
+          <h3>Cameroon</h3>
+          <p>Operating across urban and rural zones nationwide, from Yaoundé to remote communities.</p>
+        </div>
+      </div>
+
+      <div class="zone-card">
+        <div class="zone-image-wrapper">
+          <img src="IMAGE/central-africa-project.jpg" alt="Central Africa Regional Support">
+          <span class="zone-icon">🌍</span>
+        </div>
+        <div class="zone-card-body">
+          <h3>Central Africa</h3>
+          <p>Extending services and partnerships across the Central African region.</p>
+        </div>
+      </div>
+
+      <div class="zone-card">
+        <div class="zone-image-wrapper">
+          <img src="IMAGE/international-partnership.jpg" alt="Global Strategic Partnerships">
+          <span class="zone-icon">🌐</span>
+        </div>
+        <div class="zone-card-body">
+          <h3>International</h3>
+          <p>Global reach for import-export operations and strategic commercial partnerships.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  <div class="cta-band">
+    <h2>Need Expert Guidance?</h2>
+    <p>From advisory to full project management — we are ready to assist.</p>
+    <button class="btn-white" onclick="showPage('contact')">Schedule a Consultation →</button>
+  </div>
+  <div id="services-footer"></div>
+</div>
+
+<!-- ================================================================ -->
+<!-- CONTACT PAGE -->
+<!-- ================================================================ -->
+<div class="page" id="page-contact">
+  <section class="sub-hero">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-accent"></div>
+    <div class="hero-content" style="padding-top:24px;">
+      <div class="hero-tag">Let's Talk</div>
+      <h1 class="all-h1">Contact<em>Us</em></h1>
+      <p class="hero-sub">Have a project in mind? A question? A partnership proposal? We'd love to hear from you. Our team is ready to help.</p>
+    </div>
+    <div class="hero-stripe"></div>
+  </section>
+
+  <div class="section">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="section-tag">Reach Out</div>
+        <h3>We Are Here For You</h3>
+        <p style="color:var(--text-mid);font-size:15px;line-height:1.8;margin-bottom:36px;">Whether you represent an institution, a business, or are an individual with a project — we welcome all enquiries across our seven activity sectors.</p>
+
+        <div class="contact-item">
+          <div class="ci-icon">📍</div>
+          <div><strong>Address</strong><p>Cameroon — urban and rural zones</p></div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon">📞</div>
+          <div><strong>Phone</strong><p>To be confirmed</p></div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon">✉️</div>
+          <div><strong>Email</strong><p>contact@elanfils.cm</p></div>
+        </div>
+        <div class="contact-item">
+          <div class="ci-icon">🌍</div>
+          <div><strong>Zones</strong><p>Cameroon · Central Africa · International</p></div>
+        </div>
+
+        <div style="margin-top:40px;padding:28px;background:var(--off-white);border-radius:8px;border-left:3px solid var(--orange);">
+          <p style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;color:var(--navy);margin-bottom:8px;">Response Time</p>
+          <p style="font-size:14px;color:var(--text-mid);">We typically respond within 24–48 business hours. For urgent matters, please call directly.</p>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap">
+        <div style="background:var(--off-white);padding:48px;border-radius:8px;">
+          <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:28px;color:var(--navy);margin-bottom:8px;">Send Us a Message</h3>
+          <p style="font-size:14px;color:var(--text-mid);margin-bottom:32px;">Fill in the form and our team will get back to you promptly.</p>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" placeholder="Jean">
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" placeholder="Dupont">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="jean@example.com">
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" placeholder="+237 600 000 000">
+          </div>
+          <div class="form-group">
+            <label>Subject / Activity</label>
+            <select>
+              <option value="">Select a domain...</option>
+              <option>Import – Export</option>
+              <option>BTP & Construction</option>
+              <option>Renewable Energy & Green Building</option>
+              <option>Agri-Food & Nurseries</option>
+              <option>Ecotourism</option>
+              <option>General Commerce</option>
+              <option>Professional Services</option>
+              <option>Partnership Proposal</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Your Message</label>
+            <textarea placeholder="Describe your project, question, or request..."></textarea>
+          </div>
+          <button class="btn-primary" style="width:100%;justify-content:center;" onclick="handleSubmit(event)">Send Message →</button>
+          <p id="form-success" style="display:none;text-align:center;margin-top:16px;color:var(--orange);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;">✓ Message sent! We'll be in touch within 48 hours.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="contact-footer"></div>
+</div>
+
+<!-- ===== SHARED FOOTER TEMPLATE ===== -->
+<template id="footer-tpl">
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:28px;color:#fff;">ELAN <span style="color:#E8621A;">&amp; FILS</span></div>
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:0.25em;color:#E8621A;text-transform:uppercase;">SARL</div>
+          <p style="font-size:14px;color:rgba(255,255,255,0.5);line-height:1.75;margin-top:16px;max-width:280px;">Multisectoral solutions for individuals, businesses, and institutions.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a onclick="showPage('home')">Home</a>
+          <a onclick="showPage('about')">About Us</a>
+          <a onclick="showPage('contact')">Contact</a>
+        </div>
+        <div class="footer-col">
+          <h4>Activities</h4>
+          <a onclick="showPage('import-export')">Import – Export</a>
+          <a onclick="showPage('btp')">BTP</a>
+          <a onclick="showPage('energy')">Renewable Energy</a>
+          <a onclick="showPage('agro')">Agri-Food</a>
+        </div>
+        <div class="footer-col">
+          <h4>More</h4>
+          <a onclick="showPage('eco')">Ecotourism</a>
+          <a onclick="showPage('commerce')">Commerce</a>
+          <a onclick="showPage('services')">Services</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Élan & Fils SARL. All rights reserved. · Cameroon</p>
+        <p>Built with purpose.</p>
+      </div>
+    </div>
+  </footer>
+</template>
+
+<script>
+// ===== PAGE ROUTER =====
+const pages = ['home','about','import-export','btp','energy','agro','eco','commerce','services','contact'];
+const navIds = ['home','about','activities','activities','activities','activities','activities','activities','activities','contact'];
+
+function showPage(name) {
+  pages.forEach(p => {
+    const el = document.getElementById('page-' + p);
+    if (el) el.classList.toggle('active', p === name);
+  });
+  // Update nav highlights
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  const map = {
+    'home': 'nav-home',
+    'about': 'nav-about',
+    'contact': 'nav-contact',
+    'import-export': 'nav-activities',
+    'btp': 'nav-activities',
+    'energy': 'nav-activities',
+    'agro': 'nav-activities',
+    'eco': 'nav-activities',
+    'commerce': 'nav-activities',
+    'services': 'nav-activities'
+  };
+  const navEl = document.getElementById(map[name]);
+  if (navEl) navEl.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  // Inject footer if needed
+  const footerSlots = {
+    'about': 'about-footer',
+    'import-export': 'ie-footer',
+    'btp': 'btp-footer',
+    'energy': 'energy-footer',
+    'agro': 'agro-footer',
+    'eco': 'eco-footer',
+    'commerce': 'commerce-footer',
+    'services': 'services-footer',
+    'contact': 'contact-footer'
+  };
+  if (footerSlots[name]) {
+    const slot = document.getElementById(footerSlots[name]);
+    if (slot && !slot.hasChildNodes()) {
+      const tpl = document.getElementById('footer-tpl');
+      slot.appendChild(tpl.content.cloneNode(true));
+    }
+  }
+
+  // Close mobile menu
+  document.getElementById('navLinks').classList.remove('open');
+}
+
+// ===== HAMBURGER =====
+function toggleMenu() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+// ===== FORM SUBMIT =====
+function handleSubmit(e) {
+  e.preventDefault();
+  const success = document.getElementById('form-success');
+  success.style.display = 'block';
+  setTimeout(() => { success.style.display = 'none'; }, 5000);
+}
+
+// ===== SCROLL NAV SHADOW =====
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('mainNav');
+  if (window.scrollY > 20) {
+    nav.style.boxShadow = '0 4px 24px rgba(27,42,74,0.25)';
+  } else {
+    nav.style.boxShadow = 'none';
+  }
+});
+
+// Init first page footer would auto-run on nav, home page has its own footer
+// Animate cards on scroll (simple intersection observer)
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.card, .activity-tile, .stat-box, .zone-card, .step-item, .activity-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(24px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
